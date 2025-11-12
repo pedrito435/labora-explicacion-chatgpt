@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<!-- Declara que este documento es HTML5 -->
+<html lang="es">
+<!-- Inicio del documento HTML con idioma español -->
+
+<head>
+    <!-- Sección de metadatos y recursos -->
+    <meta charset="UTF-8">
+    <!-- Define la codificación de caracteres como UTF-8 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Configura la vista para dispositivos móviles -->
+    <title>LABORA - Tu Plataforma de Empleo</title>
+    <!-- Logo de labora que aparece en la pestaña -->
+    <link rel="icon" href="/labora_db/imagenes/logo-labora.png" type="image/x-icon"/>
+    <!-- Título que aparece en la pestaña del navegador -->
+    <link rel="stylesheet" href="/labora_db/recursos/css/index.css">
+    <link rel="stylesheet" href="/labora_db/recursos/css/nav.css">
+    <!-- Vincula el archivo de estilos CSS -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- Importa la fuente Roboto de Google Fonts -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="/labora_db/recursos/css/estilos.css">
+    
+</head>
+<!-- Cuerpo principal del documento -->
+<body class="cuerpo-inicio">
+<canvas id="network-canvas" aria-hidden="true"></canvas>
+
+    <!-- nav_publico.html -->
+        <nav class="navbar navbar--public">
+    <div class="logo">
+        <a href="/labora_db/index.html">Labora</a>
+    </div>
+
+    <!-- Botón hamburguesa (arriba a la derecha) -->
+    <button class="hamburger" aria-label="Abrir menú" aria-expanded="false" aria-controls="menu">
+        <i class="fa-solid fa-bars"></i>
+    </button>
+
+    <!-- Links -->
+    <ul id="menu" class="nav-links">
+    <!-- Header del panel -->
+    <li class="menu-header">
+        <img src="/labora_db/imagenes/logo-labora.png" alt="Labora" class="menu-logo">
+        <button class="menu-close" aria-label="Cerrar menú">
+        <i class="fa-solid fa-xmark"></i>
+        </button>
+    </li>
+
+    <!-- CTA principal -->
+    <li class="menu-cta">
+        <a href="/labora_db/formularios/register-options.html" class="btn-primario">
+        <i class="fa-solid fa-rocket"></i> Empezar ahora
+        </a>
+    </li>
+
+    <li class="menu-divider"><span>Explorar</span></li>
+
+    <!-- Links importantes -->
+    <li><a href="/labora_db/vistas/comunes/preguntas_frecuentes.html">
+        <i class="fa-solid fa-circle-question"></i> FAQ
+        <small>Respuestas rápidas</small>
+    </a></li>
+
+    <li><a href="/labora_db/formularios/login-options.html">
+        <i class="fa-solid fa-right-to-bracket"></i> Iniciar Sesión
+        <small>Accedé a tu cuenta</small>
+    </a></li>
+
+    <li><a href="/labora_db/formularios/register-options.html">
+        <i class="fa-solid fa-user-plus"></i> Registrarse
+        <small>Creá tu perfil</small>
+    </a></li>
+
+    <li class="menu-divider"><span>Contacto</span></li>
+
+    <li class="menu-inline">
+        <a href="https://wa.me/1234567890" target="_blank"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>
+        <a href="https://www.instagram.com/laboraarg/?utm_source=ig_web_button_share_sheet" target="_blank"><i class="fa-brands fa-instagram"></i> Instagram</a>
+    </li>
+
+    <!-- Footer del panel -->
+    <li class="menu-footer">
+        <span>&copy; 2025 Labora</span>
+        <a href="/labora_db/vistas/comunes/terminos_y_condiciones.html">Términos</a>
+        <a href="/labora_db/vistas/comunes/politica_privacidad.html">Privacidad</a>
+    </li>
+    </ul>
+
+
+    <!-- Fondo oscuro al abrir menú en móvil -->
+    <div class="menu-backdrop"></div>
+    </nav>
+
+
+    <div class="contenido-principal">
+        <div class="descripcion">
+            <h1 style="color: #ffff; font-size: 4rem; margin-bottom: 20px; letter-spacing: 2px;">LABORA</h1>
+            <h2 style="color: #ffff; font-size: 2.5rem; margin-bottom: 20px;">Encuentra al profesional ideal</h2>
+            <p>Labora es una aplicación web que busca simplificar la búsqueda de empleo y la contratación de servicios, conectando a profesionales calificados con compañeros de manera segura y eficiente. Apunta a ser una plataforma inclusiva, accesible para cualquier persona mayor de edad, donde quienes necesiten un servicio pueden encontrar desde un plomero hasta un carpintero, y cualquier profesional con un título o matrícula puede ofrecer su trabajo, garantizando confianza mediante un riguroso proceso de verificación.</p>
+        </div>
+
+        <div class="servicios-grid">
+            <div class="tarjeta-servicio">
+                <i class="fas fa-hammer"></i>
+                <h3>Carpintería</h3>
+                <p>Expertos en trabajos de madera y muebles a medida</p>
+                <div class="servicio-extra">
+                    <img src="/labora_db/imagenes/carpintero.jpg" alt="carpintero">
+                    
+                  </div>
+            </div>
+            <div class="tarjeta-servicio">
+                <i class="fas fa-wrench"></i>
+                <h3>Plomería</h3>
+                <p>Soluciones profesionales para tu hogar</p>
+                <div class="servicio-extra">
+                    <img src="/labora_db/imagenes/plomero.jpg" alt="plomero">
+                    
+                  </div>
+            </div>
+            <div class="tarjeta-servicio">
+                <i class="fas fa-chalkboard-teacher"></i>
+                <h3>Educación</h3>
+                <p>Profesores calificados para todas las materias</p>
+                <div class="servicio-extra">
+                    <img src="/labora_db/imagenes/educacion.jpg" alt="educacion">
+                    
+                  </div>
+            </div>
+            <div class="tarjeta-servicio">
+                <i class="fas fa-bolt"></i>
+                <h3>Electricista</h3>
+                <p>Instalaciones y reparaciones eléctricas seguras</p>
+                <div class="servicio-extra">
+                    <img src="/labora_db/imagenes/electricista.jpg" alt="electricista">
+                    
+                  </div>
+            </div>
+            <div class="tarjeta-servicio">
+                <i class="fas fa-leaf"></i>
+                <h3>Jardinería</h3>
+                <p>Mantenimiento y diseño de espacios verdes</p>
+                <div class="servicio-extra">
+                    <img src="/labora_db/imagenes/jardineria1.jpg" alt="Jardinería">
+                    
+                  </div>
+            </div>
+            <div class="tarjeta-servicio">
+                <i class="fas fa-paint-roller"></i>
+                <h3>Pintura</h3>
+                <p>Acabados profesionales para interiores y exteriores</p>
+                <div class="servicio-extra">
+                    <img src="/labora_db/imagenes/pintureria2.jpg" alt="pintor">
+                    
+                  </div>
+            </div>
+            <div class="tarjeta-servicio">
+                <i class="fa-solid fa-screwdriver-wrench"></i>
+                <h3>Gasista</h3>
+                <p>Instalación, reparación y mantenimiento de sistemas y artefactos de gas con seguridad y confianza.</p>
+                <div class="servicio-extra">
+                    <img src="/labora_db/imagenes/gasistaa1.jpg" alt="gasista">
+                    
+                  </div>
+            </div>
+            <div class="tarjeta-servicio">
+                <i class="fa-solid fa-hand-holding-heart"></i>
+                <h3>Acompañante terapeutico</h3>
+                <p>Brinda apoyo, cuidado y contención en el día a día.</p>
+                <div class="servicio-extra">
+                    <img src="/labora_db/imagenes/acompaña.jpg" alt="acompañante">
+                    
+                  </div>
+            </div>
+            <div class="tarjeta-servicio">
+                <i class="fa-solid fa-person-running"></i>
+                <h3>Profesor de educacion fisica</h3>
+                <p>Fomenta el deporte, la salud y el bienestar físico.</p>
+                <div class="servicio-extra">
+                    <img src="/labora_db/imagenes/profeed.jpg" alt="profeed">
+                    
+                  </div>
+            </div>
+            <div class="tarjeta-servicio">
+                <i class="fas fa-truck"></i>
+                <h3>Fletero</h3>
+                <p>Transporte rápido y seguro de cargas y mudanzas.</p>
+                <div class="servicio-extra">
+                    <img src="/labora_db/imagenes/flete.jpeg" alt="fletero">
+                    
+                  </div>
+            </div>
+        </div>
+
+        <a href="formularios/register-options.html" class="boton-empezar">Empecemos</a>
+    </div>
+
+
+
+
+    <!-- ====== PLANES LABORA ====== -->
+<section id="planes" class="planes">
+  <header class="planes-head">
+    <h2>Planes para Trabajadores</h2>
+    <p>Elegí el plan que más te convenga. Con Premium ganás visibilidad, confianza y más contactos.</p>
+  </header>
+
+  <div class="planes-grid">
+    <!-- Plan Gratis -->
+    <article class="plan-card">
+      <div class="plan-top">
+        <h3>GRATIS</h3>
+        <div class="price">
+          <span class="amount">$0</span><span class="per">ARS /mes</span>
+        </div>
+        <small class="imp">Sin costos ocultos</small>
+      </div>
+      <ul class="features">
+        <li><i class="fa-solid fa-check"></i> Perfil visible en Labora</li>
+        <li><i class="fa-solid fa-check"></i> Foto de perfil + datos básicos</li>
+        <li><i class="fa-solid fa-check"></i> Hasta 3 fotos en el portfolio</li>
+        <li><i class="fa-solid fa-check"></i> Reseñas de clientes</li>
+      </ul>
+      <a href="/labora_db/formularios/register-options.html" class="btn-plan btn-base">
+        Crear perfil gratis
+      </a>
+    </article>
+
+    <!-- Plan Premium (destacado) -->
+    <article class="plan-card destacado" aria-label="Lo más popular">
+      <div class="popular">LO MÁS POPULAR</div>
+      <div class="plan-top">
+        <h3>PREMIUM</h3>  
+        <div class="price">
+          <span class="amount">$4.999</span><span class="per">ARS /mes</span>
+        </div>
+        <small class="imp">+ impuestos aplicables</small>
+      </div>
+      <ul class="features">
+        <li><i class="fa-solid fa-check"></i> <strong>Prioridad en búsquedas</strong></li>
+        <li><i class="fa-solid fa-check"></i> Marco <strong>dorado</strong> + insignia Premium</li>
+        <li><i class="fa-solid fa-check"></i> Hasta <strong>10 fotos o videos</strong> en el portfolio</li>
+        <li><i class="fa-solid fa-check"></i> <strong>Estadísticas</strong> de visitas y contactos</li>
+      </ul>
+      <a href="/labora_db/formularios/register-options.html" class="btn-plan btn-premium">
+        Subirme a Premium
+      </a>
+    </article>
+
+    <!-- Plan Premium Anual -->
+    <article class="plan-card">
+      <div class="plan-top">
+        <h3>PREMIUM ANUAL</h3>
+        <div class="price">
+          <span class="amount">$49.999</span><span class="per">ARS /año</span>
+        </div>
+        <small class="imp">Ahorrás 2 meses</small>
+      </div>
+      <ul class="features">
+        <li><i class="fa-solid fa-check"></i> Todo lo del Premium mensual</li>
+        <li><i class="fa-solid fa-check"></i> Insignia <strong>Miembro Anual</strong></li>
+        <li><i class="fa-solid fa-check"></i> Prioridad extra en campañas destacadas</li>
+        <li><i class="fa-solid fa-check"></i> Soporte prioritario</li>
+      </ul>
+      <a href="/labora_db/formularios/register-options.html" class="btn-plan btn-anual">
+        Elegir plan anual
+      </a>
+    </article>
+  </div>
+
+  <p class="planes-legal">
+    * Los valores en ARS pueden mostrarse de forma referencial según cotización. El plan Premium da mayor exposición, pero no garantiza contrataciones.
+  </p>
+</section>
+<!-- ====== /PLANES LABORA ====== -->
+
+<!-- ====== POR QUÉ ELEGIR LABORA ====== -->
+<section class="porque-labora reveal" data-delay="0">
+  <div class="contenedor-porque">
+    <h2 class="reveal" data-delay="0">¿Por qué elegir Labora?</h2>
+    <div class="porque-grid">
+      <div class="porque-card reveal" data-delay="100">
+        <i class="fa-solid fa-handshake"></i>
+        <h3>Conectamos talento con oportunidad</h3>
+        <p>En Labora podés encontrar trabajadores confiables de diferentes oficios y contratarlos de forma directa, sin intermediarios.</p>
+      </div>
+      <div class="porque-card reveal" data-delay="200">
+        <i class="fa-solid fa-user-check"></i>
+        <h3>Perfiles verificados</h3>
+        <p>Cada trabajador tiene su propio perfil con información, experiencia y referencias, para que puedas elegir con confianza y seguridad.</p>
+      </div>
+      <div class="porque-card reveal" data-delay="300">
+        <i class="fa-solid fa-bullhorn"></i>
+        <h3>Difusión para emprendedores</h3>
+        <p>Si sos trabajador, creá tu perfil y hacé visible tu trabajo. Labora te ayuda a crecer y llegar a más personas que buscan tus servicios.</p>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- ====== /POR QUÉ ELEGIR LABORA ====== -->
+
+<!-- FOOTER -->
+<footer class="footer">
+    <div class="footer-container">
+        <div class="footer-links">
+            <a href="/labora_db/vistas/comunes/terminos_y_condiciones.html">Términos y Condiciones</a>
+            <a href="/labora_db/vistas/comunes/politica_privacidad.html">Política de Privacidad</a>
+            <a href="/labora_db/vistas/comunes/preguntas_frecuentes.html">Preguntas Frecuentes</a>
+        </div>
+
+        <div class="footer-redes">
+            <a href="https://www.facebook.com/" target="_blank">
+                <img src="https://cdn-icons-png.flaticon.com/24/733/733547.png" alt="Facebook">
+            </a>
+            <a href="https://www.instagram.com/laboraarg/?utm_source=ig_web_button_share_sheet" target="_blank">
+                <img src="https://cdn-icons-png.flaticon.com/24/2111/2111463.png" alt="Instagram">
+            </a>
+        </div>
+
+        <div class="footer-copy">
+            &copy; 2025 Labora - Todos los derechos reservados.
+        </div>
+    </div>
+</footer>
+
+
+
+    <script src="recursos/js/menu-hamburguesa.js"></script>
+    <script src="recursos/js/index.js"></script>
+    <script src="recursos/js/script.js"></script>
+
+</body>
+</html> 
