@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" href="/labora_db/imagenes/logo-labora.png" type="image/x-icon"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Registro de Empleado - LABORA</title>
+  
+  <link rel="stylesheet" href="../recursos/css/worker-registration.css">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
+  <style>
+    .demo-bar{display:flex;gap:.5rem;align-items:center;margin:.5rem 0 1rem}
+    .demo-bar .chip{background:#000;border:1px solid #000;padding:.4rem .6rem;border-radius:8px;cursor:pointer;color:#fff}
+    .demo-toggle{display:flex;gap:.5rem;align-items:center}
+    /* Eliminada .demo-note */
+  </style>
+</head>
+
+<body>
+  <div class="header">
+    <h1>LABORA</h1>
+    <a class="btn-volver chip" href="javascript:void(0)" onclick="goBack()" aria-label="Volver">
+      <i class="fas fa-arrow-left"></i> Volver
+    </a>
+  </div>
+
+  <div class="form-section">
+    <h2>Registro de Empleado</h2>
+
+
+    <!-- enctype para archivo -->
+    <form action="../funciones/worker-register.php" method="POST" enctype="multipart/form-data" onsubmit="return validateForm()">
+      <div class="input-group">
+        <label for="emp-nombre">Nombre Completo</label>
+        <input type="text" id="emp-nombre" name="nombre" required>
+        <small class="error-text" data-error-for="emp-nombre"></small>
+      </div>
+
+      <div class="input-group">
+        <label for="emp-dni">DNI</label>
+        <input type="text" id="emp-dni" name="dni" required pattern="[0-9]{7,8}" title="Ingrese un DNI válido de 7 u 8 dígitos">
+        <small class="error-text" data-error-for="emp-dni"></small>
+      </div>
+
+      <div class="input-group">
+        <label for="emp-nacionalidad">Nacionalidad</label>
+        <select id="emp-nacionalidad" name="nacionalidad" required>
+          <option value="" disabled selected>Elegí una nacionalidad…</option>
+          <option value="Argentina">Argentina</option>
+          <option value="Chilena">Chilena</option>
+          <option value="Brasilera">Brasilera</option>
+        </select>
+        <small class="error-text" data-error-for="emp-nacionalidad"></small>
+      </div>
+
+      <div class="input-group">
+        <label for="emp-fecha-nacimiento">Fecha de Nacimiento</label>
+        <input type="date" id="emp-fecha-nacimiento" name="fecha-nacimiento" required>
+        <small class="error-text" data-error-for="emp-fecha-nacimiento"></small>
+      </div>
+
+      <div class="input-group">
+        <label for="emp-email">Correo Electrónico</label>
+        <input type="email" id="emp-email" name="email" required>
+        <small class="error-text" data-error-for="emp-email"></small>
+      </div>
+
+      <div class="input-group">
+        <label for="emp-password">Contraseña</label>
+        <div class="password-container">
+          <input type="password" id="emp-password" name="clave" required>
+          <button type="button" class="toggle-password" onclick="togglePassword()">
+            <i class="fas fa-eye"></i>
+          </button>
+        </div>
+        <small class="error-text" data-error-for="emp-password"></small>
+      </div>
+
+      <div class="input-group">
+        <label for="emp-confirm-password">Confirmar Contraseña</label>
+        <div class="password-container">
+          <input type="password" id="emp-confirm-password" name="confirm-password" required>
+          <button type="button" class="toggle-password" onclick="toggleConfirmPassword()">
+            <i class="fas fa-eye"></i>
+          </button>
+        </div>
+        <small class="error-text" data-error-for="emp-confirm-password"></small>
+      </div>
+
+      <div class="input-group">
+        <label for="emp-telefono">Teléfono</label>
+        <input type="tel" id="emp-telefono" name="telefono" required inputmode="numeric" pattern="[0-9]{10}" title="Ingresá 10 dígitos, sin espacios ni guiones">
+        <small class="error-text" data-error-for="emp-telefono"></small>
+      </div>
+
+      <div class="input-group">
+        <label for="emp-zona">Zona de trabajo</label>
+        <select id="emp-zona" name="zona_trabajo" required>
+          <option value="" disabled selected>Elegí una zona…</option>
+          <option value="Moreno">Moreno</option>
+          <option value="Paso del rey">Paso del Rey</option>
+          <option value="Merlo">Merlo</option>
+          <option value="Padua">Padua</option>
+          <option value="Ituzaingo">Ituzaingo</option>
+        </select>
+        <small class="error-text" data-error-for="emp-zona"></small>
+      </div>
+
+      <div class="input-group">
+        <label for="emp-experiencia">Años de Experiencia</label>
+        <input type="number" id="emp-experiencia" name="experiencia" min="0" required>
+        <small class="error-text" data-error-for="emp-experiencia"></small>
+      </div>
+
+      <!-- Dropdown de selección ÚNICA de trabajo -->
+      <div class="input-group" id="grupo-trabajo" style="position:relative">
+        <label for="emp-trabajo-trigger">Seleccioná tu trabajo</label>
+
+        <!-- Botón trigger -->
+        <button type="button" id="emp-trabajo-trigger" class="ms-trigger" aria-haspopup="listbox" aria-expanded="false">
+          <span class="ms-placeholder">Elegí una opción…</span>
+          <i class="fas fa-chevron-down" aria-hidden="true"></i>
+        </button>
+
+        <!-- Menú (radios) -->
+        <div id="emp-trabajo-menu" class="ms-menu" role="listbox" aria-multiselectable="false" hidden
+             style="position:absolute; left:0; right:0; z-index:999; background:#fff; border:1px solid #ddd; border-radius:8px; padding:.5rem; margin-top:.25rem;">
+          <label class="ms-option"><input type="radio" name="__trabajo_radio" value="carpinteria"> <i class="fas fa-hammer"></i> Carpintería</label>
+          <label class="ms-option"><input type="radio" name="__trabajo_radio" value="plomeria"> <i class="fas fa-wrench"></i> Plomería</label>
+          <label class="ms-option"><input type="radio" name="__trabajo_radio" value="educacion"> <i class="fas fa-chalkboard-teacher"></i> Educación</label>
+          <label class="ms-option"><input type="radio" name="__trabajo_radio" value="electricidad"> <i class="fas fa-bolt"></i> Electricidad</label>
+          <label class="ms-option"><input type="radio" name="__trabajo_radio" value="jardineria"> <i class="fas fa-leaf"></i> Jardinería</label>
+          <label class="ms-option"><input type="radio" name="__trabajo_radio" value="pintura"> <i class="fas fa-paint-roller"></i> Pintura</label>
+          <label class="ms-option"><input type="radio" name="__trabajo_radio" value="fletero"> <i class="fas fa-truck"></i> Fletero</label>
+          <label class="ms-option"><input type="radio" name="__trabajo_radio" value="cerrajero"> <i class="fas fa-key"></i> Cerrajero</label>
+          <label class="ms-option"><input type="radio" name="__trabajo_radio" value="gasista"> <i class="fa-solid fa-screwdriver-wrench"></i> gasista</label>
+          <label class="ms-option"><input type="radio" name="__trabajo_radio" value="acompañante terapeutico"> <i class="fa-solid fa-hand-holding-heart"></i> acompañante terapeutico</label> 
+          <label class="ms-option"><input type="radio" name="__trabajo_radio" value="Profesor de educación física"> <i class="fa-solid fa-person-running"></i> Profesor de educación física</label> 
+        </div>
+
+        <!-- Valor real que viaja al backend -->
+        <input type="hidden" id="emp-trabajo" name="trabajo" value="">
+        <small class="error-text" data-error-for="emp-trabajo"></small>
+      </div>
+      <!-- FIN selección única -->
+
+      <div class="input-group">
+        <label for="emp-documentacion">Matricula (un archivo)</label>
+        <input type="file" id="emp-documentacion" name="documentacion" accept=".pdf,.jpg,.jpeg,.png" required>
+        <small class="file-hint">Formatos aceptados: PDF, JPG, JPEG, PNG.</small>
+        <small class="error-text" data-error-for="emp-documentacion"></small>
+      </div>
+
+      <div class="input-group">
+        <label for="emp-dni-frente">D.N.I FRENTE</label>
+        <input type="file" id="emp-dni-frente" name="dni-frente" accept=".pdf,.jpg,.jpeg,.png" required>
+        <small class="file-hint">Formatos aceptados: PDF, JPG, JPEG, PNG.</small>
+        <small class="error-text" data-error-for="emp-dni-frente"></small>
+      </div>
+
+      <div class="input-group">
+        <label for="emp-dni-dorso">D.N.I DORSO</label>
+        <input type="file" id="emp-dni-dorso" name="dni-dorso" accept=".pdf,.jpg,.jpeg,.png" required>
+        <small class="file-hint">Formatos aceptados: PDF, JPG, JPEG, PNG.</small>
+        <small class="error-text" data-error-for="emp-dni-dorso"></small>
+      </div>
+
+      <button type="submit">Registrarse</button>
+    </form>
+
+    <div id="message" class="message" role="alert" aria-live="polite"></div>
+  </div>
+
+  <script src="../recursos/js/worker-registration.js"></script>
+  <script src="../recursos/js/volver.js"></script>
+  <script>
+    (function () {
+      try {
+        const params = new URLSearchParams(location.search);
+        const err = params.get('dni_error');     // "1" o "2"
+        const dniVal = params.get('dni') || '';  // para repoblar el input
+        if (!err) return;
+    
+        const input = document.getElementById('emp-dni');
+        const group = input ? input.closest('.input-group') : null;
+        const small = document.querySelector('[data-error-for="emp-dni"]');
+    
+        if (input && dniVal) input.value = dniVal;
+        if (group) group.classList.add('has-error');
+        if (small) {
+          small.textContent = (err === '2')
+            ? 'El DNI ya está asociado a un registro pendiente.'
+            : 'El DNI ya está asociado a una cuenta.';
+          small.style.color = '#d00';
+        }
+      } catch(e) { /* silencioso */ }
+    })();
+
+    </script>
+    
+</body>
+</html>

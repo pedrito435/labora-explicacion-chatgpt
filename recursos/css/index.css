@@ -1,0 +1,585 @@
+        :root {
+            --color-principal: #0077B6;
+            --color-secundario: #00B4D8;
+            --color-claro: #90E0EF;
+            --color-blanco: #ffffff;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Roboto', sans-serif;
+            overflow-x: hidden;
+           background: radial-gradient(circle at 50% 45%, #b9bdc9 0%, #7878d8 55%);
+
+        }
+        /* Fondo animado: canvas fijo al fondo */
+#network-canvas{
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;          /* detrás de todo */
+  pointer-events: none; /* no tapa clics */
+  background: radial-gradient(circle at center, rgba(21,40,85,.5) 0%, transparent 60%);
+}
+
+
+        
+        .contenedor-logo {
+            display: flex;
+            align-items: center;
+            flex: 0 0 auto;
+        }
+
+        .contenedor-logo img {
+            height: 60px;
+            margin-right: 15px;
+        }
+
+        .deslizador-fondo {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            display: flex;
+            justify-content: space-between;
+            overflow: hidden;
+        }
+
+        .columna-fondo {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            padding: 20px;
+            animation: deslizarArribaAbajo 20s infinite alternate;
+        }
+
+        .columna-fondo:nth-child(2) {
+            animation-delay: -5s;
+        }
+
+        .columna-fondo:nth-child(3) {
+            animation-delay: -10s;
+        }
+
+        @keyframes deslizarArribaAbajo {
+            0% {
+                transform: translateY(0);
+            }
+            100% {
+                transform: translateY(-30%);
+            }
+        }
+
+        .elemento-fondo {
+            width: 100%;
+            height: 300px;
+            overflow: hidden;
+            border-radius: 15px;
+            opacity: 0.15;
+            transition: opacity 1s ease;
+        }
+
+        .elemento-fondo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .contenido-principal {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 80px 20px;
+            background: transparent; /* ✅ así no tapa el fondo */
+            
+        }
+
+        .descripcion {
+            max-width: 800px;
+            margin: 40px auto;
+            font-size: 1.2rem;
+            line-height: 1.6;
+            color: #ffff;
+        }
+
+        .servicios-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .tarjeta-servicio {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 119, 182, 0.1);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        
+        .tarjeta-servicio:hover {
+            transform: translateY(-5px);
+        }
+
+        .tarjeta-servicio i {
+            font-size: 2.5rem;
+            color: var(--color-principal);
+            margin-bottom: 15px;
+        }
+
+        .tarjeta-servicio h3 {
+            color: var(--color-principal);
+            margin: 10px 0;
+        }
+
+        .tarjeta-servicio p {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .boton-empezar {
+            display: inline-block;
+            background-color: var(--color-principal);
+            color: white;
+            padding: 15px 40px;
+            border-radius: 30px;
+            font-size: 1.2rem;
+            text-decoration: none;
+            margin-top: 40px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .boton-empezar:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 119, 182, 0.3);
+        }
+
+        /* Footer */
+        .footer {
+        background-color: #f2f2f2;
+        padding: 40px 20px;
+        text-align: center;
+        color: #333;
+        border-top: 1px solid #ddd;
+        font-family: Arial, sans-serif;
+        }
+
+        .footer-container {
+            max-width: 1000px;
+            margin: auto;
+        }
+
+        .footer-links {
+            margin-bottom: 20px;
+        }
+
+        .footer-links a {
+            margin: 0 15px;
+            text-decoration: none;
+            color: #0077B6;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: #023e8a;
+        }
+
+        .footer-redes {
+            margin-bottom: 20px;
+        }
+
+        .footer-redes a {
+            margin: 0 10px;
+        }
+
+        .footer-redes img {
+            width: 24px;
+            height: 24px;
+            transition: transform 0.3s;
+        }
+
+        .footer-redes img:hover {
+            transform: scale(1.2);
+        }
+
+        .footer-copy {
+            font-size: 14px;
+            color: #666;
+        }
+        /* Contenedor oculto que se despliega hacia abajo */
+.tarjeta-servicio .servicio-extra{
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: max-height .5s ease, opacity .4s ease;
+    margin-top: 12px;
+    will-change: max-height;
+  }
+  
+  /* Al pasar el mouse por la card, mostrar el extra */
+  .tarjeta-servicio:hover .servicio-extra{
+    max-height: 250px;   /* ajustá según tu imagen/lista */
+    opacity: 1;
+  }
+  
+  /* Imagen grande dentro del extra */
+  .tarjeta-servicio .servicio-extra img{
+    width: 100%;
+    max-height: 250px;   /* hacela más grande si querés */
+    object-fit: cover;
+    border-radius: 10px;
+    display: block;
+    margin-bottom: 10px;
+  }
+  
+  /* Lista */
+  .tarjeta-servicio .servicio-extra ul{
+    list-style: disc;
+    padding-left: 20px;
+    margin: 0;
+  }
+  .tarjeta-servicio .servicio-extra li{
+    margin: 6px 0;
+  }
+  
+  /* Asegurar que el grid permita crecer las cards */
+  .servicios-grid{
+    align-items: start;  /* evita recortes si alguna card crece */
+  }
+  .form { width: min(520px, 100% - 2rem); margin: 1rem auto; }
+.form .row { display:flex; gap:1rem; flex-wrap:wrap; }
+.form .col { flex:1 1 260px; }
+.form label { display:block; margin:.25rem 0 .35rem; }
+.form input, .form select, .form textarea { width:100%; max-width:100%; padding:.75rem; }
+@media (max-width:600px){ .form { margin: .75rem auto; } }
+/* ==== SOLO MOBILE / TABLET. Desktop queda intacto ==== */
+
+/* Tablets y abajo */
+@media (max-width: 1024px){
+    /* el contenedor ocupa ancho completo pero SIN tocar desktop */
+    .contenido-principal{
+      width: 100%;
+      margin: 0 auto;
+      padding: 24px;
+      box-sizing: border-box;
+    }
+  
+   /* mantenemos 2 columnas también en tablets */
+.servicios-grid{
+  grid-template-columns: repeat(2, 1fr); /* 2 columnas */
+  gap: 20px; /* un poco más de aire */
+}
+
+  }
+  
+  /* Móviles grandes */
+  @media (max-width: 768px){
+    .servicios-grid{ grid-template-columns: repeat(2, 1fr); }
+  
+    /* tipografías más chicas solo en mobile */
+    .descripcion h1{ font-size: 2rem; letter-spacing: 1px; }
+    .descripcion h2{ font-size: 1.4rem; }
+    .descripcion p{ font-size: .95rem; line-height: 1.45; }
+  
+    /* botón ancho completo en mobile */
+    .boton-empezar{ width: 100%; text-align: center; }
+  
+    /* navbar: sólo ajustes internos en mobile (no full-bleed global) */
+    .navbar .navbar-inner{
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 12px;
+      box-sizing: border-box;
+    }
+  }
+  
+  /* Móviles chicos */
+  @media (max-width: 480px){
+    .servicios-grid{ grid-template-columns: repeat(2, 1fr); }
+  }
+  
+  /* Si en mobile se te genera scroll horizontal por fondos 100vw, limitá SOLO en mobile */
+  @media (max-width: 768px){
+    html, body { overflow-x: hidden; }
+  }
+  /* ===== AJUSTES DE ESPACIO SOLO PARA MOBILE ===== */
+@media (max-width: 768px){
+
+    /* Más aire entre las cards */
+    .servicios-grid {
+      gap: 24px; /* antes 16px, más separación vertical */
+      padding-bottom: 20px;
+    }
+  
+    /* Botón con espacio arriba y abajo */
+    .boton-empezar {
+      margin-top: 16px;
+      margin-bottom: 24px;
+    }
+  
+    /* Footer: más espacio y links separados */
+    .footer-links {
+      display: flex;
+      flex-direction: column;
+      gap: 8px; /* espacio entre Términos y Política */
+      margin-bottom: 12px;
+      text-align: center;
+    }
+  
+    .footer-redes {
+      margin-top: 12px;
+      margin-bottom: 12px;
+    }
+  
+    .footer-copy {
+      font-size: 0.8rem;
+      margin-top: 8px;
+    }
+  }
+  
+
+ /* ===== MOBILE EN DOS COLUMNAS ===== */
+@media (max-width: 768px){
+    .servicios-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr); /* dos columnas */
+      gap: 20px;
+    }
+  }
+  
+  /* Para celulares muy chicos seguir en 1 columna */
+  @media (max-width: 480px){
+    .servicios-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  /* ====== PLANES LABORA ====== */
+:root{
+  --color-principal: #0077B6;         /* ya la tenías en nav.css */
+  --color-claro: #90E0EF;             /* ya la tenías en nav.css */
+  --color-blanco: #FFFFFF;            /* ya la tenías en nav.css */
+  --color-oscuro: #0B1E2A;            /* apoyo */
+  --dorado: #F6C453;                  /* dorado suave para Premium */
+  --dorado-strong: #E6B325;
+}
+
+.planes{
+  padding: clamp(2.5rem, 4vw, 4rem) 1rem;
+  background: linear-gradient(180deg, #F5FBFF 0%, #EAF6FF 100%);
+}
+
+.planes-head{
+  max-width: 1100px;
+  margin: 0 auto 2rem auto;
+  text-align: center;
+}
+.planes-head h2{
+  color: var(--color-principal);
+  font-size: clamp(1.8rem, 2.5vw, 2.4rem);
+  margin: 0 0 .5rem 0;
+  letter-spacing: .5px;
+}
+.planes-head p{
+  color: #23506B;
+  margin: 0;
+}
+
+.planes-grid{
+  max-width: 1100px;
+  margin: 2rem auto 0 auto;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 1.25rem;
+}
+
+.plan-card{
+  grid-column: span 12;
+  background: #ffffff;
+  border: 2px solid rgba(0,119,182,.12);
+  border-radius: 18px;
+  box-shadow: 0 12px 28px rgba(0,119,182,.08);
+  padding: 1.25rem 1.25rem 1.5rem;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.plan-card .plan-top{
+  border-bottom: 1px dashed rgba(0,119,182,.25);
+  padding-bottom: .75rem;
+  margin-bottom: .75rem;
+}
+.plan-card h3{
+  margin: 0 0 .5rem 0;
+  letter-spacing: .5px;
+  color: #0A2A3C;
+}
+.plan-card .price{
+  display: flex; align-items: baseline; gap: .35rem;
+  color: #0A2A3C;
+}
+.plan-card .price .amount{
+  font-size: 1.85rem; font-weight: 800;
+}
+.plan-card .price .per{
+  opacity: .8; font-weight: 600;
+}
+.plan-card .imp{
+  display:block; color:#4F7D96; margin-top:.25rem;
+}
+
+.plan-card .features{
+  list-style: none; padding: 0; margin: 0 0 1rem 0;
+  display: grid; gap: .5rem;
+}
+.plan-card .features li{
+  display: flex; gap: .5rem; align-items: flex-start;
+  color: #0F3D52;
+}
+.plan-card .features i{
+  color: var(--color-principal);
+  margin-top: .15rem;
+}
+
+.btn-plan{
+  display: inline-flex;
+  justify-content: center; align-items: center;
+  padding: .85rem 1rem;
+  border-radius: 12px;
+  text-decoration: none;
+  font-weight: 800;
+  transition: transform .12s ease, box-shadow .12s ease, opacity .12s ease;
+  box-shadow: 0 10px 24px rgba(0,119,182,.18);
+}
+.btn-plan:hover{ transform: translateY(-1px); }
+
+.btn-base{
+  background: linear-gradient(135deg, #00B4D8, #0077B6);
+  color: #fff;
+}
+.btn-premium{
+  background: linear-gradient(135deg, var(--dorado), var(--dorado-strong));
+  color: #1A1300;
+  box-shadow: 0 10px 24px rgba(246,196,83,.35);
+}
+.btn-anual{
+  background: linear-gradient(135deg, #76D0FF, #1C94D2);
+  color: #072538;
+}
+
+/* Card destacada */
+.plan-card.destacado{
+  border-color: rgba(246,196,83,.65);
+  outline: 3px solid rgba(246,196,83,.35);
+  transform: translateY(-2px);
+}
+.plan-card.destacado .features i{
+  color: var(--dorado-strong);
+}
+.plan-card.destacado h3{
+  color: #3B2A00;
+}
+.plan-card.destacado .price{ color:#3B2A00; }
+
+/* Cinta “LO MÁS POPULAR” */
+.plan-card.destacado .popular{
+  position: absolute; top: -12px; left: 16px;
+  background: linear-gradient(90deg, var(--dorado-strong), var(--dorado));
+  color: #1A1300;
+  font-weight: 900;
+  padding: .35rem .6rem;
+  border-radius: 8px;
+  box-shadow: 0 6px 16px rgba(0,0,0,.12);
+  font-size: .8rem;
+  letter-spacing: .5px;
+}
+
+/* Layout responsivo */
+@media (min-width: 720px){
+  .plan-card{ grid-column: span 4; }
+  .plan-card.destacado{ grid-column: span 4; }
+}
+
+.planes-legal{
+  max-width: 1100px; margin: 1rem auto 0 auto;
+  font-size: .9rem; color:#24536A; opacity:.9;
+}
+
+/* ====== SECCIÓN POR QUÉ ELEGIR LABORA ====== */
+.porque-labora{
+  background: linear-gradient(90deg, #0099cc 0%, #0077b6 100%);
+  color: #fff;
+  padding: 80px 20px;
+  text-align: center;
+}
+.contenedor-porque{
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.porque-labora h2{
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 50px;
+  position: relative;
+  display: inline-block;
+}
+.porque-labora h2::after{
+  content:"";
+  display:block;
+  width:80%;
+  height:3px;
+  background:#fff;
+  margin:10px auto 0;
+  border-radius:2px;
+}
+.porque-grid{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:30px;
+}
+.porque-card{
+  background:#fff;
+  color:#333;
+  border-radius:12px;
+  box-shadow:0 4px 10px rgba(0,0,0,.15);
+  padding:35px 25px;
+  flex:1 1 300px;
+  max-width:350px;
+  transition:transform .3s ease, box-shadow .3s ease;
+}
+.porque-card:hover{
+  transform:translateY(-8px);
+  box-shadow:0 6px 18px rgba(0,0,0,.25);
+}
+.porque-card i{
+  font-size:2.5rem;
+  color:var(--color-principal, #0077b6);
+  margin-bottom:15px;
+}
+.porque-card h3{
+  color:var(--color-principal, #0077b6);
+  font-size:1.3rem;
+  margin-bottom:15px;
+}
+.porque-card p{
+  font-size:.95rem;
+  line-height:1.5;
+}
+/* Responsivo */
+@media (max-width:768px){
+  .porque-grid{ flex-direction:column; align-items:center; }
+  .porque-card{ max-width:90%; }
+}

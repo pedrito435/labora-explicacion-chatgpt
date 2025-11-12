@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="/labora_db/imagenes/logo-labora.png" type="image/x-icon"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Usuario - LABORA</title>
+
+    <!-- RUTAS ABSOLUTAS -->
+    <link rel="stylesheet" href="/labora_db/recursos/css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+
+<body>
+    <div class="header">
+        <h1>LABORA</h1>
+        <a class="btn-volver chip" href="javascript:void(0)" onclick="goBack()" aria-label="Volver">
+            <i class="fas fa-arrow-left"></i> Volver
+        </a>
+    </div>
+
+    <div class="form-section">
+        <h2>Registro de Usuario</h2>
+
+        <!-- IMPORTANTE: action con ruta absoluta + enctype para subir archivos -->
+        <form action="/labora_db/funciones/user-registration.php"
+              method="post"
+              id="employerForm"
+              onsubmit="return validateForm()"
+              enctype="multipart/form-data">
+
+            <div class="input-group">
+                <label for="empd-nombre">Nombre completo</label>
+                <input type="text" id="empd-nombre" name="nombre" required>
+            </div>
+
+            <div class="input-group">
+                <label for="emp-dni">DNI</label>
+                <input type="text" id="emp-dni" name="dni" required pattern="[0-9]{7,8}" title="Ingrese un DNI válido de 7 u 8 dígitos">
+                <small class="error-text" data-error-for="emp-dni"></small>
+            </div>
+
+            <div class="input-group">
+                <label for="emp-fecha-nacimiento">Fecha de Nacimiento</label>
+                <input type="date" id="emp-fecha-nacimiento" name="fecha-nacimiento" required>
+            </div>
+
+            <div class="input-group">
+                <label for="empd-email">Correo Electrónico</label>
+                <input type="email" id="empd-email" name="email" required>
+            </div>
+
+            <div class="input-group">
+                <label for="empd-password">Contraseña</label>
+                <div class="password-container">
+                    <input type="password" id="empd-password" name="clave" required>
+                    <button type="button" class="toggle-password" onclick="togglePassword()">
+                        <i class="fas fa-eye"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div class="input-group">
+                <label for="empd-confirm-password">Confirmar Contraseña</label>
+                <div class="password-container">
+                    <input type="password" id="empd-confirm-password" name="confirm-password" required>
+                    <button type="button" class="toggle-password" onclick="toggleConfirmPassword()">
+                        <i class="fas fa-eye"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div class="input-group">
+                <label for="empd-telefono">Teléfono</label>
+                <input type="tel" id="empd-telefono" name="telefono" required>
+            </div>
+
+            <div class="input-group">
+                <label for="empd-direccion">Dirección</label>
+                <input type="text" id="empd-direccion" name="direccion" required>
+            </div>
+
+            <div class="input-group">
+                <label for="emp-localidad">Localidad</label>
+                <select id="emp-localidad" name="localidad" required>
+                    <option value="" disabled selected>Elegí una localidad…</option>
+                    <option value="Moreno">Moreno</option>
+                    <option value="Paso del rey">Paso del Rey</option>
+                    <option value="Merlo">Merlo</option>
+                    <option value="Padua">Padua</option>
+                    <option value="Ituzaingo">Ituzaingo</option>
+                </select>
+            </div>
+
+            <!-- Documentación para verificación -->
+            <div class="input-group">
+                <label>DNI (frente)</label>
+                <input type="file" name="dni-frente" accept="image/jpeg,image/png,application/pdf">
+            </div>
+            <div class="input-group">
+                <label>DNI (dorso)</label>
+                <input type="file" name="dni-dorso" accept="image/jpeg,image/png,application/pdf">
+            </div>
+            <div class="input-group">
+                <label>Documento adicional (certificado/comprobante)</label>
+                <input type="file" name="documentacion" accept="image/jpeg,image/png,application/pdf">
+            </div>
+
+            <button type="submit">Registrarse</button>
+        </form>
+
+        <div id="message" class="message"></div>
+    </div>
+
+    <!-- RUTAS ABSOLUTAS A JS -->
+    <script src="/labora_db/recursos/js/user-registration.js"></script>
+    <script src="/labora_db/recursos/js/volver.js"></script>
+    <script>
+        (function () {
+          try {
+            const params = new URLSearchParams(location.search);
+            const msg = params.get('dni_error');   // texto del error
+            const dni = params.get('dni') || '';
+            if (!msg) return;
+        
+            const input = document.getElementById('emp-dni');
+            const group = input ? input.closest('.input-group') : null;
+            const small = document.querySelector('[data-error-for="emp-dni"]');
+        
+            if (input && dni) input.value = dni;             // repoblar
+            if (group) group.classList.add('has-error');     // borde rojo
+            if (small) {
+              small.textContent = msg;"error"                       // texto
+              small.style.color = '#d00';
+            }
+          } catch(e) { /* silencioso */ }
+        })();
+        </script>
+<style>
+    .input-group.has-error input { border-color: #d00 !important; }
+    .error-text { color:#d00; font-size:.9rem; display:block; margin-top:.25rem; }
+  </style>
+          
+</body>
+</html>

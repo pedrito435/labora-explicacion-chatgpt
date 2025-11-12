@@ -1,0 +1,698 @@
+/* ===== NAVBAR GLOBAL LABORA ===== */
+:root {
+  --nav-bg: rgba(255, 255, 255, .86);
+  --nav-bd: #e6edf7;
+  --tab: #0b2940;
+  --tab-active: #0a60a8;
+  --brand: #0a60a8;
+  --shadow: 0 8px 30px rgba(0, 0, 0, .06);
+}
+
+* { box-sizing: border-box }
+
+/* --- Barra principal --- */
+.navbar {
+  position: sticky; top: 0; z-index: 1000;
+  display: flex; align-items: center; gap: 12px;
+  padding: 10px 16px;
+  backdrop-filter: saturate(1.15) blur(6px);
+  background: var(--nav-bg);
+  border-bottom: 1px solid var(--nav-bd);
+}
+.navbar .logo a {
+  text-decoration: none; font-weight: 900; letter-spacing: .2px;
+  color: var(--brand); font-family: Roboto, system-ui, Arial;
+  font-size: 22px;
+}
+
+/* --- Botón hamburguesa --- */
+.hamburger {
+  margin-left: auto;
+  display: grid; place-items: center;
+  width: 40px; height: 40px;
+  border: 1px solid var(--nav-bd);
+  border-radius: 10px; background: #fff; cursor: pointer;
+}
+.hamburger i { font-size: 18px; color: #0b2940 }
+
+/* --- Menú lateral --- */
+.nav-links {
+  position: fixed; inset: 0 0 0 auto;
+  width: min(82vw, 380px);
+  transform: translateX(100%);
+  transition: transform .28s ease;
+  background: #fff;
+  border-left: 1px solid var(--nav-bd);
+  box-shadow: var(--shadow);
+  display: flex; flex-direction: column;
+  padding: 12px;
+  z-index: 1001;
+  height: 100vh; overflow-y: auto;
+}
+.nav-links.open { transform: translateX(0) }
+.nav-links li { list-style: none }
+.nav-links a {
+  display: flex; align-items: center; gap: 10px;
+  padding: 12px; border-radius: 10px;
+  text-decoration: none; color: #0b2940; font-weight: 600;
+}
+.nav-links a:hover { background: #f3f7ff; color: var(--tab-active) }
+.nav-links a.active { background: #e8f3ff; color: var(--tab-active) }
+
+/* --- Fondo oscuro detrás del panel --- */
+.menu-backdrop {
+  position: fixed; inset: 0;
+  background: rgba(15, 23, 42, .35);
+  opacity: 0; pointer-events: none;
+  transition: opacity .2s ease;
+  z-index: 1000;
+}
+.menu-backdrop.show { opacity: 1; pointer-events: auto }
+
+/* ===== DISEÑO DESKTOP GENERAL (con tabs centrados) ===== */
+@media (min-width: 992px) {
+  .hamburger { display: none }
+  .menu-backdrop { display: none !important }
+
+  .navbar {
+    display: grid;
+    grid-template-columns: 160px 1fr 160px;
+    align-items: center;
+  }
+  .nav-links {
+    position: static; transform: none;
+    width: auto; height: auto; padding: 0;
+    border: 0; box-shadow: none; background: transparent;
+    flex-direction: row; align-items: center;
+    justify-content: center; gap: 22px;
+  }
+  .nav-links a {
+    position: relative; padding: 10px 6px; border-radius: 8px;
+    color: var(--tab); font-weight: 600;
+  }
+  .nav-links a::after {
+    content: ""; position: absolute; left: 10%; right: 10%; bottom: -11px; height: 3px;
+    background: transparent; border-radius: 3px;
+    transform: scaleX(0);
+    transition: transform .18s ease, background .18s ease;
+  }
+  .nav-links a.active::after {
+    background: var(--tab-active); transform: scaleX(1);
+  }
+}
+
+/* ============================================================= */
+/* === VARIANTE PÚBLICA (landing/index con menú azul) =========== */
+/* ============================================================= */
+
+.navbar--public .hamburger { display: grid }
+
+/* --- Ajuste base --- */
+.navbar.navbar--public {
+  display: flex; align-items: center; justify-content: space-between;
+  background: #fff; border-bottom: 1px solid #e6edf7;
+  backdrop-filter: none;
+}
+
+/* --- Panel azul --- */
+.navbar--public .nav-links {
+  background: linear-gradient(180deg, #0b6fb3 0%, #0b84c8 40%, #0b6fb3 100%) !important;
+  color: #eef7ff;
+  border-left: 1px solid rgba(255, 255, 255, .18) !important;
+  padding: 14px 18px 18px !important;
+  gap: 10px !important;
+  height: 100vh; overflow-y: auto;
+  z-index: 10000 !important;
+}
+
+/* --- Header: logo + botón cerrar (X) --- */
+.navbar--public .menu-header {
+  position: relative;
+  align-items: center; gap: 10px;
+  padding: 6px 2px 14px 2px !important;
+  border-bottom: 1px solid rgba(255, 255, 255, .18) !important;
+  margin-bottom: 6px !important;
+}
+.navbar--public .menu-logo { width: 36px; height: 36px; object-fit: contain }
+.navbar--public .menu-close {
+  position: absolute; top: 6px; right: 6px;
+  width: 34px; height: 34px; border-radius: 10px;
+  display: grid; place-items: center;
+  background: rgba(255, 255, 255, .12) !important;
+  border: 1px solid rgba(255, 255, 255, .25) !important;
+  color: #fff;
+}
+.navbar--public .menu-close i { font-size: 16px }
+
+/* --- CTA principal --- */
+.navbar--public .menu-cta { padding: 2px 0 6px 0 !important }
+.navbar--public .btn-primario {
+  width: 100%;
+  background: linear-gradient(135deg, #21d4fd, #0ea5e9) !important;
+  color: #fff !important;
+  border: 1px solid rgba(255, 255, 255, .25);
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(14, 165, 233, .35);
+  padding: 12px 14px !important;
+  font-weight: 800 !important;
+}
+
+/* --- Divisores (Explorar / Contacto) --- */
+.navbar--public .menu-divider {
+  margin: 6px 0 2px 0 !important;
+  padding: 6px 0 6px 0 !important;
+  color: #cfe6ff !important;
+  font-weight: 700;
+  position: relative;
+}
+.navbar--public .menu-divider::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: -1px; height: 1px;
+  background: rgba(255, 255, 255, .18);
+}
+
+/* --- Enlaces del menú --- */
+.navbar--public .nav-links a {
+  color: #fff !important; background: transparent;
+  padding: 12px 10px !important; border-radius: 10px;
+  display: flex; align-items: center; gap: 10px;
+}
+.navbar--public .nav-links a:hover {
+  background: rgba(255, 255, 255, .08) !important;
+}
+.navbar--public .nav-links a.active {
+  background: rgba(255, 255, 255, .12) !important;
+}
+.navbar--public .nav-links a small {
+  display: block; margin-top: 2px;
+  font-weight: 500; color: #d7ebff; opacity: .95;
+}
+
+/* --- Redes (WhatsApp / Instagram) --- */
+.navbar--public .menu-inline {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px; padding: 8px 0 !important;
+}
+.navbar--public .menu-inline a {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 10px 12px;
+  background: rgba(255, 255, 255, .12);
+  border: 1px solid rgba(255, 255, 255, .22);
+  border-radius: 12px;
+  color: #fff !important;
+}
+.navbar--public .menu-inline a:hover {
+  background: rgba(255, 255, 255, .20);
+}
+
+/* --- Footer (© / Términos / Privacidad) --- */
+.navbar--public .menu-footer {
+  margin-top: auto !important;
+  display: flex; align-items: center; gap: 14px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(255, 255, 255, .18) !important;
+  color: #e6f4ff;
+}
+.navbar--public .menu-footer a { color: #fff !important }
+
+/* --- Backdrop oscuro --- */
+.menu-backdrop {
+  z-index: 9990 !important;
+  background: rgba(15, 23, 42, .45) !important;
+}
+
+/* ===== OVERRIDE DURO: NAV PUBLICO SIEMPRE OFF-CANVAS VERTICAL ===== */
+.navbar.navbar--public .nav-links{
+  position: fixed !important;
+  inset: 0 0 0 auto !important;     /* panel a la derecha */
+  width: min(82vw, 380px) !important;
+  height: 100vh; height: 100dvh;    /* alto completo, con scroll interno */
+  overflow-y: auto;
+  transform: translateX(100%);
+  display: flex !important;
+  flex-direction: column !important; /* ← clave: siempre columna */
+  align-items: stretch !important;
+  gap: 10px !important;
+  padding: 14px 18px 18px !important;
+
+  /* skin azul */
+  background: linear-gradient(180deg, #0b6fb3 0%, #0b84c8 40%, #0b6fb3 100%) !important;
+  color: #eef7ff !important;
+  border-left: 1px solid rgba(255,255,255,.18) !important;
+  z-index: 10000 !important;
+}
+.navbar.navbar--public .nav-links.open{ transform: translateX(0) }
+
+.navbar.navbar--public .nav-links a{
+  color:#fff !important; background:transparent;
+  padding:12px 10px !important; border-radius:10px;
+}
+.navbar.navbar--public .nav-links a:hover{ background:rgba(255,255,255,.08) !important }
+.navbar.navbar--public .nav-links a.active{ background:rgba(255,255,255,.12) !important }
+.navbar.navbar--public .nav-links a::after{ display:none !important } /* desactiva subrayado de tabs */
+
+/* Header con logo + X alineada arriba a la derecha */
+.navbar.navbar--public .menu-header{
+  position:relative; display:flex !important; align-items:center; gap:10px;
+  padding:6px 2px 14px 2px !important;
+  border-bottom:1px solid rgba(255,255,255,.18) !important;
+  margin-bottom:6px !important;
+}
+.navbar.navbar--public .menu-logo{ width:36px;height:36px;object-fit:contain }
+.navbar.navbar--public .menu-close{
+  position:absolute; top:6px; right:6px;
+  width:34px;height:34px;border-radius:10px;
+  display:grid;place-items:center;
+  background:rgba(255,255,255,.12) !important;
+  border:1px solid rgba(255,255,255,.25) !important;
+  color:#fff;
+}
+
+/* CTA, divisores, redes y footer con tu estilo */
+.navbar.navbar--public .menu-cta{ padding:2px 0 6px 0 !important }
+.navbar.navbar--public .btn-primario{
+  width:100%; background:linear-gradient(135deg,#21d4fd,#0ea5e9) !important;
+  color:#fff !important; border:1px solid rgba(255,255,255,.25);
+  border-radius:12px; box-shadow:0 8px 20px rgba(14,165,233,.35);
+  padding:12px 14px !important; font-weight:800 !important;
+}
+.navbar.navbar--public .menu-divider{
+  display:flex !important; align-items:center;
+  margin:6px 0 2px 0 !important; padding:6px 0 !important;
+  color:#cfe6ff !important; font-weight:700; position:relative;
+}
+.navbar.navbar--public .menu-divider::after{
+  content:""; position:absolute; left:0; right:0; bottom:-1px; height:1px;
+  background:rgba(255,255,255,.18);
+}
+.navbar.navbar--public .menu-inline{
+  display:grid !important; grid-template-columns:1fr 1fr; gap:12px;
+  padding:8px 0 !important;
+}
+.navbar.navbar--public .menu-inline a{
+  display:inline-flex; align-items:center; gap:8px;
+  padding:10px 12px; background:rgba(255,255,255,.12);
+  border:1px solid rgba(255,255,255,.22); border-radius:12px; color:#fff !important;
+}
+.navbar.navbar--public .menu-footer{
+  margin-top:auto !important; display:flex !important; align-items:center; gap:14px;
+  padding-top:12px; border-top:1px solid rgba(255,255,255,.18) !important;
+  color:#e6f4ff;
+}
+.navbar.navbar--public .menu-footer a{ color:#fff !important }
+
+/* Backdrop por debajo del panel */
+.menu-backdrop{ z-index: 9990 !important; background: rgba(15,23,42,.45) !important }
+
+/* ===== FIX APP (filtros/mensajes/perfil/configuración) ===== */
+/* Solo aplica cuando NO es la navbar pública de la landing */
+@media (min-width: 992px){
+
+  /* 1) Ocultar elementos del panel móvil en desktop */
+  .navbar:not(.navbar--public) .menu-header,
+  .navbar:not(.navbar--public) .menu-close,
+  .navbar:not(.navbar--public) .menu-cta,
+  .navbar:not(.navbar--public) .menu-divider {
+    display: none !important;
+  }
+
+  /* 2) Tabs limpios: sin pill azul, solo subrayado */
+  .navbar:not(.navbar--public) .nav-links a {
+    background: transparent !important;
+    color: var(--tab);
+    padding: 10px 8px;               /* un toque más de aire lateral */
+    border-radius: 8px;
+  }
+  .navbar:not(.navbar--public) .nav-links a:hover {
+    background: transparent !important;
+    color: var(--tab-active);
+  }
+  .navbar:not(.navbar--public) .nav-links a.active {
+    background: transparent !important;
+    color: #ffffff !important; /* CAMBIA EL COLOR DEL TEXTO DEL NAV ACTIVO */
+  }
+  .navbar:not(.navbar--public) .nav-links a::after {
+    bottom: -8px;                    /* subrayado un poco más cerca */
+    height: 3px;
+  }
+
+  /* 3) Layout de la barra en desktop (centrado de tabs estable) */
+  .navbar:not(.navbar--public){
+    min-height: 64px;                /* altura consistente */
+    display: grid;
+    grid-template-columns: 160px 1fr 160px;
+    align-items: center;
+  }
+  .navbar:not(.navbar--public) .nav-links{
+    justify-content: center;
+    gap: 26px;                       /* separación entre tabs */
+  }
+}
+
+/* ============ 1) MOBILE APP: header del panel y botón cerrar  ============ */
+/* Aplica a todas las páginas que NO son la landing pública */
+.navbar:not(.navbar--public) .menu-header{
+  display:flex !important;
+  align-items:center; justify-content:space-between;
+  gap:10px;
+  padding:10px 8px 12px;
+  position: sticky; top: 0;            /* pegado arriba cuando el panel scrollea */
+  background:#fff;                      /* panel app es blanco */
+  border-bottom:1px solid var(--nav-bd);
+  z-index: 2;
+}
+.navbar:not(.navbar--public) .menu-logo{ width:34px; height:34px; object-fit:contain }
+.navbar:not(.navbar--public) .menu-close{
+  display:grid; place-items:center;
+  width:36px; height:36px; border-radius:8px;
+  background:#fff; border:1px solid var(--nav-bd);
+  color:#0b2940;
+}
+
+/* ============ 2) DESKTOP APP: barrita visible y sin mini-scroll ============ */
+@media (min-width: 950px){
+  /* más espacio debajo del nav para que entre el subrayado */
+  .navbar:not(.navbar--public){
+    padding-bottom: 14px;               /* crea “canaleta” para la barrita */
+    overflow: visible;                   /* por si algún padre recorta */
+  }
+
+  /* tabs sin pill, solo subrayado */
+  .navbar:not(.navbar--public) .nav-links a{
+    background: transparent !important;
+    padding: 10px 10px;
+  }
+  .navbar:not(.navbar--public) .nav-links a:hover{
+    background: transparent !important;
+  }
+  .navbar:not(.navbar--public) .nav-links a.active{
+    background: transparent !important;
+  }
+  .navbar:not(.navbar--public) .nav-links a::after{
+    bottom: -6px;                        /* acercamos un poquito la barra */
+    height: 3px;
+  }
+
+  /* ocultar piezas del panel móvil en desktop de la app */
+  .navbar:not(.navbar--public) .menu-header,
+  .navbar:not(.navbar--public) .menu-cta,
+  .navbar:not(.navbar--public) .menu-divider,
+  .navbar:not(.navbar--public) .menu-close{
+    display: none !important;
+  }
+}
+
+/* ===========================
+   THEME AZUL para la BARRA superior (todas las páginas)
+   =========================== */
+:root{
+  --nav-blue1:#0b6fb3;
+  --nav-blue2:#0b84c8;
+  --nav-ink:#ffffff;
+  --nav-ink-muted:#d7ebff;
+  --nav-underline:#bfe6ff;
+}
+
+/* Barra superior en azul sólido (quita blur) */
+.navbar{
+  background: linear-gradient(180deg, var(--nav-blue1) 0%, var(--nav-blue2) 45%, var(--nav-blue1) 100%) !important;
+  border-bottom: 1px solid rgba(255,255,255,.18) !important;
+  backdrop-filter: none !important;
+  color: var(--nav-ink);
+}
+.navbar .logo a{ color:#fff !important }
+
+/* ===========================
+   DESKTOP: tabs sin scroll interno y barrita visible
+   =========================== */
+@media (min-width:992px){
+  /* La barra no debe tener scroll propio ni recortar la barrita */
+  .navbar{
+    padding-bottom: 18px !important;  /* espacio para la barrita */
+    overflow: visible !important;
+  }
+  .navbar .nav-links{
+    height: auto !important;
+    overflow: visible !important;
+    padding: 0 !important;
+  }
+  /* Tabs en blanco sobre fondo azul, sin pill */
+  .navbar .nav-links a{
+    color:#fff !important;
+    background: transparent !important;
+    padding: 10px 10px !important;
+    border-radius: 8px;
+  }
+  .navbar .nav-links a:hover{
+    background: rgba(255,255,255,.08) !important;
+    color:#fff !important;
+  }
+  .navbar .nav-links a.active{
+    background: transparent !important;
+    color:#fff !important;
+  }
+  /* Barrita clara siempre visible, sin necesidad de scrollear */
+  .navbar .nav-links a::after{
+    background: var(--nav-underline) !important;
+    bottom: -8px !important;
+    height: 3px !important;
+    transform: scaleX(1); /* si tenés active, queda subrayado */
+  }
+
+  /* En la APP (no pública) escondemos piezas del panel móvil */
+  .navbar:not(.navbar--public) .menu-header,
+  .navbar:not(.navbar--public) .menu-cta,
+  .navbar:not(.navbar--public) .menu-divider,
+  .navbar:not(.navbar--public) .menu-close{
+    display:none !important;
+  }
+}
+
+/* ===========================
+   MOBILE: headers de panel
+   - App: panel blanco
+   - Landing: panel azul (ya lo tenés)
+   =========================== */
+.navbar:not(.navbar--public) .menu-header{
+  display:flex; align-items:center; justify-content:space-between;
+  gap:10px; padding:10px 8px 12px;
+  position: sticky; top:0;
+  background:#fff; border-bottom:1px solid var(--nav-bd);
+  z-index:2;
+}
+.navbar:not(.navbar--public) .menu-logo{ width:34px;height:34px;object-fit:contain }
+.navbar:not(.navbar--public) .menu-close{
+  display:grid;place-items:center;width:36px;height:36px;border-radius:8px;
+  background:#fff;border:1px solid var(--nav-bd);color:#0b2940;
+}
+
+/* ===========================
+   LANDING: la barra superior también azul
+   (no cambia tu panel lateral azul)
+   =========================== */
+.navbar.navbar--public{
+  background: linear-gradient(180deg, var(--nav-blue1) 0%, var(--nav-blue2) 45%, var(--nav-blue1) 100%) !important;
+  border-bottom: 1px solid rgba(255,255,255,.18) !important;
+  backdrop-filter: none !important;
+}
+
+/* ===== SOLO LA BARRITA MARCA EL ACTIVO (desktop) ===== */
+@media (min-width: 992px){
+  /* 0) Texto siempre del mismo color (sin “azular” el activo) */
+  .navbar .nav-links a,
+  .navbar .nav-links a:visited,
+  .navbar .nav-links a.active{
+    color: #ffffff !important;              /* mismo color para todos */
+    background: transparent !important;  /* sin pill */
+  }
+
+  /* 1) Estado base: barrita oculta */
+  .navbar .nav-links a::after{
+    background: var(--nav-underline) !important;
+    bottom: -8px !important;
+    height: 3px !important;
+    left: 10%; right: 10%;
+    transform: scaleX(0) !important;     /* <— clave: oculta por defecto */
+    transition: transform .18s ease;
+  }
+
+  /* 2) Solo el activo muestra la barrita completa */
+  .navbar .nav-links a.active::after{
+    transform: scaleX(1) !important;
+  }
+
+  /* (opcional) hover con barrita parcial, sin cambiar texto */
+  .navbar .nav-links a:hover::after{
+    transform: scaleX(.7) !important;
+  }
+}
+
+/* === FIX: jerarquía y clics en mobile === */
+.navbar { position: relative; z-index: 100; }
+
+/* Panel por encima del backdrop y de cualquier sticky cercano */
+.nav-links{
+  z-index: 10010 !important;
+  -webkit-overflow-scrolling: touch; /* iOS: scroll suave dentro del panel */
+  touch-action: manipulation;        /* mejora respuesta de tap */
+}
+.nav-links.open { transform: translateX(0); }
+
+/* Backdrop por debajo del panel pero por encima del resto */
+.menu-backdrop{
+  z-index: 10000 !important;
+  pointer-events: none;              /* no bloquea clics si no está visible */
+}
+.menu-backdrop.show{
+  pointer-events: auto;              /* habilita cerrar al tocar fuera */
+}
+
+/* Asegurar que nada “flotante” del header tape los links */
+.nav-links .menu-header{
+  position: sticky;
+  top: 0;
+  z-index: 1; /* menor que los links */
+}
+.nav-links a{
+  position: relative;
+  z-index: 2; /* por encima del header sticky y decoraciones */
+}
+
+/* Evitar que alguna barrita decorativa tape el tap */
+.nav-links a::after{
+  pointer-events: none !important;
+}
+
+/* ===== MOBILE PANEL LOOK & FEEL (solo móvil) ===== */
+@media (max-width: 991.98px){
+  .navbar .nav-links{
+    background: #ffffff;               /* panel claro */
+    box-shadow: 0 20px 50px rgba(2, 24, 43, .18);
+    border-left: 1px solid var(--nav-bd);
+    padding: 14px 12px;
+    gap: 6px;
+  }
+  .navbar .nav-links .menu-header{
+    background: #fff;
+    border-bottom: 1px solid var(--nav-bd);
+    margin-bottom: 6px;
+    border-radius: 10px;
+  }
+  .navbar .nav-links a{
+    display: flex; align-items: center; gap: 10px;
+    padding: 12px 10px;
+    border-radius: 10px;
+    font-weight: 700;
+    color: #0b2940 !important;
+    background: transparent;
+  }
+  .navbar .nav-links a:hover{
+    background: #f3f7ff !important;
+    color: var(--tab-active) !important;
+  }
+  .navbar .nav-links a.active{
+    background: #e8f3ff !important;
+    color: var(--tab-active) !important;
+  }
+  .navbar .btn-primario{
+    width: 100%;
+    border-radius: 12px;
+    padding: 12px 14px;
+    font-weight: 800;
+  }
+}
+/* ===== SOLO MÓVILES ===== */
+@media (max-width: 768px) {
+
+  /* Cuando el off-canvas está abierto, la barra Volver no debe interferir */
+  .menu-open .volver-wrapper{
+    position: static !important;   /* deja de ser sticky */
+    pointer-events: none !important; /* no captura clics */
+    opacity: .999; /* truco para no reflujo pero sin tocar diseño */
+    z-index: 0 !important;
+  }
+
+  /* Asegurá capas correctas */
+  .navbar { position: relative; z-index: 10; }
+  .nav-links {
+    position: fixed; top: 0; right: 0; bottom: 0;
+    width: 80%; max-width: 320px; z-index: 20;
+    overflow-y: auto; background: #fff;
+  }
+  .menu-backdrop {
+    position: fixed; inset: 0;
+    background: rgba(0,0,0,.35); z-index: 19;
+    display: none;
+  }
+  .menu-backdrop.is-open { display: block; }
+
+  /* Cuando el menú está abierto, evitamos que el logo capture los toques */
+  .body--nav-open .logo-link { pointer-events: none; }
+
+  /* Si ya tenés clases propias para abrir/cerrar, dejalas; estas son de respaldo */
+  .nav-links.is-open { display: block !important; }
+}
+
+/* si querés que sea SOLO en el home, podés envolver cada selector con body.is-home ... */
+/* ===== SOLO MÓVILES ===== */
+@media (max-width: 768px) {
+  /* Z-index centralizados (ajustá si tenés otros overlays) */
+  :root{
+    --z-page: 1;
+    --z-nav: 1000;
+    --z-backdrop: 1001;
+    --z-drawer: 1002;
+  }
+
+  /* Navbar siempre arriba en mobile */
+  .navbar{
+    position: fixed;        /* fija arriba */
+    top: 0; left: 0; right: 0;
+    z-index: var(--z-nav);
+    background: var(--nav-bg, #fff);
+  }
+
+  /* Off-canvas (panel) por arriba del backdrop */
+  .nav-links{
+    position: fixed; top: 0; right: 0; bottom: 0;
+    width: 80%; max-width: 320px;
+    background: #fff;
+    z-index: var(--z-drawer);
+    overflow-y: auto;
+
+    /* animación + estado cerrado por defecto */
+    transform: translateX(100%);
+    transition: transform .25s ease;
+  }
+  .nav-links.is-open{ transform: translateX(0); }
+
+  /* Backdrop debajo del panel pero arriba del contenido */
+  .menu-backdrop{
+    position: fixed; inset: 0;
+    background: rgba(0,0,0,.35);
+    z-index: var(--z-backdrop);
+    display: none;
+  }
+  .menu-backdrop.is-open{ display: block; }
+
+  /* Contenido “normal” (buscador/filtros/etc.) más abajo que el nav */
+  .buscador, .filtros, .filtros-pane, .search-panel, .volver-wrapper, .sticky{
+    z-index: var(--z-page) !important;
+  }
+
+  /* Cuando el off-canvas está abierto, la barra Volver no interfiere */
+  .menu-open .volver-wrapper{
+    position: static !important;
+    pointer-events: none !important;
+    opacity: .999;
+    z-index: 0 !important;
+  }
+
+  /* Evitá clics fantasma en el logo mientras el menú está abierto */
+  .body--nav-open .logo-link{ pointer-events: none; }
+
+  /* Bloquear scroll del body cuando el menú esté abierto */
+  .body--nav-open{ overflow: hidden; }
+}
+
+/* Si querés que sea SOLO en el home, envolvé con: body.is-home .navbar {...} etc. */

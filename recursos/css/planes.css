@@ -1,0 +1,155 @@
+ /* ====== PLANES LABORA ====== */
+:root{
+  --color-principal: #0077B6;         /* ya la tenías en nav.css */
+  --color-claro: #90E0EF;             /* ya la tenías en nav.css */
+  --color-blanco: #FFFFFF;            /* ya la tenías en nav.css */
+  --color-oscuro: #0B1E2A;            /* apoyo */
+  --dorado: #F6C453;                  /* dorado suave para Premium */
+  --dorado-strong: #E6B325;
+}
+
+body{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.planes{
+  padding: clamp(2.5rem, 4vw, 4rem) 1rem;
+  background: linear-gradient(180deg, #F5FBFF 0%, #EAF6FF 100%);
+}
+
+.planes-head{
+  max-width: 1100px;
+  margin: 0 auto 2rem auto;
+  text-align: center;
+}
+.planes-head h2{
+  color: var(--color-principal);
+  font-size: clamp(1.8rem, 2.5vw, 2.4rem);
+  margin: 0 0 .5rem 0;
+  letter-spacing: .5px;
+}
+.planes-head p{
+  color: #23506B;
+  margin: 0;
+}
+
+.planes-grid{
+  max-width: 1100px;
+  margin: 2rem auto 0 auto;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 1.25rem;
+}
+
+.plan-card{
+  grid-column: span 12;
+  background: #ffffff;
+  border: 2px solid rgba(0,119,182,.12);
+  border-radius: 18px;
+  box-shadow: 0 12px 28px rgba(0,119,182,.08);
+  padding: 1.25rem 1.25rem 1.5rem;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.plan-card .plan-top{
+  border-bottom: 1px dashed rgba(0,119,182,.25);
+  padding-bottom: .75rem;
+  margin-bottom: .75rem;
+}
+.plan-card h3{
+  margin: 0 0 .5rem 0;
+  letter-spacing: .5px;
+  color: #0A2A3C;
+}
+.plan-card .price{
+  display: flex; align-items: baseline; gap: .35rem;
+  color: #0A2A3C;
+}
+.plan-card .price .amount{
+  font-size: 1.85rem; font-weight: 800;
+}
+.plan-card .price .per{
+  opacity: .8; font-weight: 600;
+}
+.plan-card .imp{
+  display:block; color:#4F7D96; margin-top:.25rem;
+}
+
+.plan-card .features{
+  list-style: none; padding: 0; margin: 0 0 1rem 0;
+  display: grid; gap: .5rem;
+}
+.plan-card .features li{
+  display: flex; gap: .5rem; align-items: flex-start;
+  color: #0F3D52;
+}
+.plan-card .features i{
+  color: var(--color-principal);
+  margin-top: .15rem;
+}
+
+.btn-plan{
+  display: inline-flex;
+  justify-content: center; align-items: center;
+  padding: .85rem 1rem;
+  border-radius: 12px;
+  text-decoration: none;
+  font-weight: 800;
+  transition: transform .12s ease, box-shadow .12s ease, opacity .12s ease;
+  box-shadow: 0 10px 24px rgba(0,119,182,.18);
+}
+.btn-plan:hover{ transform: translateY(-1px); }
+
+.btn-base{
+  background: linear-gradient(135deg, #00B4D8, #0077B6);
+  color: #fff;
+}
+.btn-premium{
+  background: linear-gradient(135deg, var(--dorado), var(--dorado-strong));
+  color: #1A1300;
+  box-shadow: 0 10px 24px rgba(246,196,83,.35);
+}
+.btn-anual{
+  background: linear-gradient(135deg, #76D0FF, #1C94D2);
+  color: #072538;
+}
+
+/* Card destacada */
+.plan-card.destacado{
+  border-color: rgba(246,196,83,.65);
+  outline: 3px solid rgba(246,196,83,.35);
+  transform: translateY(-2px);
+}
+.plan-card.destacado .features i{
+  color: var(--dorado-strong);
+}
+.plan-card.destacado h3{
+  color: #3B2A00;
+}
+.plan-card.destacado .price{ color:#3B2A00; }
+
+/* Cinta “LO MÁS POPULAR” */
+.plan-card.destacado .popular{
+  position: absolute; top: -12px; left: 16px;
+  background: linear-gradient(90deg, var(--dorado-strong), var(--dorado));
+  color: #1A1300;
+  font-weight: 900;
+  padding: .35rem .6rem;
+  border-radius: 8px;
+  box-shadow: 0 6px 16px rgba(0,0,0,.12);
+  font-size: .8rem;
+  letter-spacing: .5px;
+}
+
+/* Layout responsivo */
+@media (min-width: 720px){
+  .plan-card{ grid-column: span 4; }
+  .plan-card.destacado{ grid-column: span 4; }
+}
+
+.planes-legal{
+  max-width: 1100px; margin: 1rem auto 0 auto;
+  font-size: .9rem; color:#24536A; opacity:.9;
+}
